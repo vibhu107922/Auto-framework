@@ -13,7 +13,7 @@ public class LoginTest extends NWPBaseTest {
     DashboardClass dashboardClass;
 
     @Test
-    public void loginTest() {
+    public void loginTest() throws Exception{
 	String userName = ProjectUtilities.properties.getProperty("userName");
 	String password = ProjectUtilities.properties.getProperty("password");
 	try {

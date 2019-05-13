@@ -13,20 +13,6 @@ import java.util.function.Function;
 
 public class NWPBasePage {
 
-    public static Properties properties;
-
-    public static void readProperties() {
-	if (properties == null) {
-	    properties = new Properties();
-	    try {
-		properties.load(new FileInputStream(
-			new File(".//src//main//resources//nwp.properties")));
-	    } catch (IOException e) {
-		e.printStackTrace();
-	    }
-	}
-    }
-
     public static <T> void setFluentWait(WebDriver driver,
 	    Function<? super WebDriver, T> condition, int timeoutInSeconds) {
 	Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)

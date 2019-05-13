@@ -1,6 +1,6 @@
 *.iml
 *.idea
-NWP_Test_cases.xlsx
 *.class
-target/
-test-output/
+/target/
+/test-output/
+NWP_Test_cases.xlsx

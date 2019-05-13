@@ -12,8 +12,14 @@ public class LoginTest extends NWPBaseTest {
     LoginClass loginClass;
     DashboardClass dashboardClass;
 
+    @BeforeClass
+    private void classInit() {
+        loginClass = new LoginClass(driver);
+        dashboardClass = new DashboardClass(driver);
+    }
+
     @Test
-    public void loginTest() throws Exception{
+    public void loginTest(){
 	String userName = ProjectUtilities.properties.getProperty("userName");
 	String password = ProjectUtilities.properties.getProperty("password");
 	try {
@@ -25,9 +31,4 @@ public class LoginTest extends NWPBaseTest {
 	}
     }
 
-    @BeforeClass
-    private void classInit() {
-	loginClass = new LoginClass(driver);
-	dashboardClass = new DashboardClass(driver);
-    }
 }

@@ -16,9 +16,11 @@ public class NWPBasePage {
     public static <T> void setFluentWait(WebDriver driver,
 	    Function<? super WebDriver, T> condition, int timeoutInSeconds) {
 	Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-		.withTimeout(Duration.ofSeconds(10))
+		.withTimeout(Duration.ofSeconds(timeoutInSeconds))
 		.pollingEvery(Duration.ofSeconds(1)).ignoring(Exception.class);
 	wait.until(condition);
     }
+
+    public static int standardTimeOut = 30;
 
 }

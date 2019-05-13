@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginClass extends NWPBasePage implements LoginConstants {
     private WebDriver driver;
@@ -33,5 +34,10 @@ public class LoginClass extends NWPBasePage implements LoginConstants {
 	userNameText.sendKeys(userName);
 	passwordText.sendKeys(password);
 	loginButton.click();
+    }
+
+    public boolean waitForLogout(){
+        setFluentWait(driver, ExpectedConditions.visibilityOf(loginButton),standardTimeOut);
+        return true;
     }
 }

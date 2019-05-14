@@ -6,4 +6,5 @@ public interface DashboardConstants {
     String settingsCss = "div.user_profile img[src*='settings']";
     String logoutCss = "a.logout-btn";
     String cashoutCss = "div.lft-panel a[href*='cashout']";
+    String pageLoaderCss = "div#loading";
 }

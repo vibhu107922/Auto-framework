@@ -11,6 +11,7 @@ public class NWPBaseTest {
     public WebDriver driver;
 
     public void setup() {
+    System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
 	driver = new ChromeDriver();
 	String baseURL = ProjectUtilities.properties.getProperty("baseURL");
 	driver.manage().window().maximize();

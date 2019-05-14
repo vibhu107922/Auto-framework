@@ -14,22 +14,22 @@ public class EventClass extends NWPBasePage implements EventConstants {
 
     private WebDriver driver;
 
-    @FindBy(xpath=createEventXpath)
+    @FindBy(css=createEventCss)
     WebElement createEvent;
 
-    @FindBy(xpath = createEventFormCss)
+    @FindBy(css = createEventFormCss)
     WebElement createEventForm;
 
-    @FindBy(id=eventTitleNameId)
+    @FindBy(css=eventTitleNameCss)
     WebElement eventTitleName;
 
-    @FindBy(xpath=eventStartDateCss)
+    @FindBy(css=eventStartDateCss)
     WebElement eventStartDate;
 
     @FindBy(css=eventCalenderSetButtonCss)
     WebElement eventCalenderSetButton;
 
-    @FindBy(xpath=eventEndDateCss)
+    @FindBy(css=eventEndDateCss)
     WebElement eventEndDate;
 
     @FindBy(css=venueCss)
@@ -41,36 +41,39 @@ public class EventClass extends NWPBasePage implements EventConstants {
     @FindBy(css=deleteTicketCss)
     WebElement deleteTicket;
 
+    @FindBy(xpath=eventNextDateXpath)
+    WebElement eventNextDate;
+
+    @FindBy(css=nextButtonCss)
+    WebElement nextButton;
+
     public EventClass(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
     }
 
-    public void clickOnCreateEvent(){
+    public void clickOnCreateEvent() throws Exception{
+        Thread.sleep(5000);
         createEvent.click();
-        setFluentWait(driver, ExpectedConditions.visibilityOf(createEventForm),10000);
+        Thread.sleep(2000);
     }
 
-    public void addEventName(String eventName){
+    public void addEventName(String eventName) throws Exception{
+        Thread.sleep(1000);
         eventTitleName.sendKeys(eventName);
     }
 
-    public void setEventStartDate(){
+    public void setEventStartDate()throws Exception{
+        Thread.sleep(1000);
         eventStartDate.click();
-        driver.switchTo().frame(eventIframeId);
         eventCalenderSetButton.click();
-        driver.switchTo().defaultContent();
     }
 
-    public void setEventEndDate(){
+    public void setEventEndDate()throws Exception{
+        Thread.sleep(1000);
         eventEndDate.click();
-        Date date= new Date();
-        int currentDate = date.getDate();
-        driver.switchTo().frame(eventIframeId);
-        WebElement nextDayOnCalendar = driver.findElement(By.xpath(String.format(eventNextDate,currentDate)));
-        nextDayOnCalendar.click();
+        eventNextDate.click();
         eventCalenderSetButton.click();
-        driver.switchTo().defaultContent();
     }
 
     public void setVenue(String venue){
@@ -81,9 +84,13 @@ public class EventClass extends NWPBasePage implements EventConstants {
         this.email.sendKeys(email);
     }
 
+    public void clickNextButton(){
+        nextButton.click();
+    }
+
     public boolean verifyTicketCreated(){
         try{
-            setFluentWait(driver,ExpectedConditions.visibilityOf(deleteTicket),10000);
+            setFluentWait(driver,ExpectedConditions.visibilityOf(deleteTicket),10);
             return true;
         }
         catch (Exception e){

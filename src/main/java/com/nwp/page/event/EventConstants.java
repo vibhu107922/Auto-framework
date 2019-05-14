@@ -14,6 +14,8 @@ public interface EventConstants {
     //Event End Date
     String eventEndDateCss = "input#mobiscroll1557762137124";
     String eventNextDate = "//div[text()='%1s']";
-    String eventEndDateSetCss= "div.mbsc-fr-btn1.mbsc-fr-btn-e.mbsc-fr-btn";
 
+    String venueCss ="#mbsc-form-control-3";
+    String emailCss = "#mbsc-form-control-5";
+    String deleteTicketCss = "#mbsc-form-control-12";
 }

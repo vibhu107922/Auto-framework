@@ -32,6 +32,15 @@ public class EventClass extends NWPBasePage implements EventConstants {
     @FindBy(xpath=eventEndDateCss)
     WebElement eventEndDate;
 
+    @FindBy(css=venueCss)
+    WebElement venue;
+
+    @FindBy(css=emailCss)
+    WebElement email;
+
+    @FindBy(css=deleteTicketCss)
+    WebElement deleteTicket;
+
     public EventClass(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -62,6 +71,24 @@ public class EventClass extends NWPBasePage implements EventConstants {
         nextDayOnCalendar.click();
         eventCalenderSetButton.click();
         driver.switchTo().defaultContent();
+    }
+
+    public void setVenue(String venue){
+        this.venue.sendKeys(venue);
+    }
+
+    public void setEmail(String email){
+        this.email.sendKeys(email);
+    }
+
+    public boolean verifyTicketCreated(){
+        try{
+            setFluentWait(driver,ExpectedConditions.visibilityOf(deleteTicket),10000);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
     }
 
 }

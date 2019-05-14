@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Random;
 
 public class ProjectUtilities {
     public static Properties properties;
@@ -37,4 +38,19 @@ public class ProjectUtilities {
 	    }
 	});
     }
+
+	public static String randomStringGenerator(int length) {
+		char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+		StringBuilder sb = new StringBuilder(length);
+		Random random = new Random();
+		for (int i = 0; i < length; i++) {
+			char c = chars[random.nextInt(chars.length)];
+			sb.append(c);
+		}
+		return sb.toString();
+	}
+
+	public static long randomNumberGenerator(int length){
+		return Math.round(Math.random()*Math.pow(10,length));
+	}
 }

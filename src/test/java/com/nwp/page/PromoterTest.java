@@ -3,20 +3,24 @@ package com.nwp.page;
 import com.nwp.baseTest.NWPBaseTest;
 import com.nwp.page.dashboard.DashboardClass;
 import com.nwp.page.login.LoginClass;
+import com.nwp.page.promoter.PromoterClass;
 import com.nwp.utils.ProjectUtilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class CashoutTest extends NWPBaseTest {
+public class PromoterTest extends NWPBaseTest {
+
     LoginClass loginClass;
     DashboardClass dashboardClass;
+    PromoterClass promoterClass;
 
     @BeforeClass
     private void setupLogin() {
-	loginClass = new LoginClass(driver);
-	dashboardClass = new DashboardClass(driver);
+        loginClass = new LoginClass(driver);
+        dashboardClass = new DashboardClass(driver);
+        promoterClass = new PromoterClass(driver);
         String userName = ProjectUtilities.properties.getProperty("userName");
         String password = ProjectUtilities.properties.getProperty("password");
         try {
@@ -29,8 +33,17 @@ public class CashoutTest extends NWPBaseTest {
     }
 
     @Test
-    public void verifyCashoutFeature() throws Exception{
-        dashboardClass.navigateToCashout();
+    public void verifyAddPromoterForEvent() throws Exception{
+        dashboardClass.navigateToAddPromoter();
+
+        String userName = ProjectUtilities.randomStringGenerator(7);
+        String emailAddress = userName + "@gmail.com";
+
+        promoterClass.enterUserNameEmailMobile(userName,emailAddress);
+
+        promoterClass.selectRoleAndParent();
+
+        promoterClass.clickSaveButton();
     }
 
     @AfterClass

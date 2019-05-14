@@ -29,6 +29,9 @@ public class DashboardClass extends NWPBasePage implements DashboardConstants {
     @FindBy(css=cashoutCss)
     WebElement cashoutButton;
 
+    @FindBy(css=addPromoterCss)
+    WebElement addPromoterButton;
+
     @FindBy(css = pageLoaderCss)
     WebElement pageLoader;
 
@@ -56,5 +59,12 @@ public class DashboardClass extends NWPBasePage implements DashboardConstants {
 
     public void waitForPageLoadToBeRemoved(){
         ProjectUtilities.waitForElementAttributeToChange(driver,pageLoader,"style","display: none;");
+    }
+
+    public void navigateToAddPromoter() throws Exception{
+        setFluentWait(driver,ExpectedConditions.visibilityOf(addPromoterButton),standardTimeOut);
+        addPromoterButton.click();
+        Thread.sleep(1000);
+        waitForPageLoadToBeRemoved();
     }
 }

@@ -10,6 +10,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Date;
+
 public class EventTest extends NWPBaseTest {
     EventClass eventClass;
     LoginClass loginClass;
@@ -32,23 +34,29 @@ public class EventTest extends NWPBaseTest {
     }
 
     @Test
-    public void createEvent(){
+    public void createVerifyAndSearchEvent(){
         try {
             eventClass.clickOnCreateEvent();
-            eventClass.addEventName("abc");
+            Date d = new Date();
+            String eventName= Long.toString(d.getTime());
+            eventClass.addEventName(eventName);
             eventClass.setEventStartDate();
             eventClass.setEventEndDate();
             eventClass.setVenue("zxcvb");
             eventClass.setEmail("abc@abc.com");
             eventClass.clickNextButton();
             boolean result = eventClass.verifyTicketCreated();
-            System.out.println(result);
+            Assert.assertEquals(result,true,"Ticket not created.");
+
+            dashboardClass.clickDashboard();
+            boolean eventFound = dashboardClass.newCreatedEventFoundInList(eventName);
+            Assert.assertEquals(eventFound,true,"Event not found in List.");
+
         }
         catch (Exception e){
             System.out.println(e.getMessage());
             Assert.fail();
         }
-
     }
 
     @AfterClass

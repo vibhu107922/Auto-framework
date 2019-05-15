@@ -1,7 +1,6 @@
 package com.nwp.page.event;
 
 import com.nwp.basePage.NWPBasePage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -97,5 +96,4 @@ public class EventClass extends NWPBasePage implements EventConstants {
             return false;
         }
     }
-
 }

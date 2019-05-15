@@ -2,25 +2,25 @@ package com.nwp.page;
 
 import com.nwp.baseTest.NWPBaseTest;
 import com.nwp.page.dashboard.DashboardClass;
-import com.nwp.page.event.EventClass;
 import com.nwp.page.login.LoginClass;
+import com.nwp.page.promoter.PromoterClass;
 import com.nwp.utils.ProjectUtilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import java.util.Date;
 
-public class EventTest extends NWPBaseTest {
-    EventClass eventClass;
+public class PromoterTest extends NWPBaseTest {
+
     LoginClass loginClass;
     DashboardClass dashboardClass;
+    PromoterClass promoterClass;
 
     @BeforeClass
     private void setupLogin() {
-        eventClass = new EventClass(driver);
         loginClass = new LoginClass(driver);
         dashboardClass = new DashboardClass(driver);
+        promoterClass = new PromoterClass(driver);
         String userName = ProjectUtilities.properties.getProperty("userName");
         String password = ProjectUtilities.properties.getProperty("password");
         try {
@@ -33,29 +33,17 @@ public class EventTest extends NWPBaseTest {
     }
 
     @Test
-    public void createVerifyAndSearchEvent(){
-        try {
-            eventClass.clickOnCreateEvent();
-            Date d = new Date();
-            String eventName= Long.toString(d.getTime());
-            eventClass.addEventName(eventName);
-            eventClass.setEventStartDate();
-            eventClass.setEventEndDate();
-            eventClass.setVenue("zxcvb");
-            eventClass.setEmail("abc@abc.com");
-            eventClass.clickNextButton();
-            boolean result = eventClass.verifyTicketCreated();
-            Assert.assertEquals(result,true,"Ticket not created.");
+    public void verifyAddPromoterForEvent() throws Exception{
+        dashboardClass.navigateToAddPromoter();
 
-            dashboardClass.clickDashboard();
-            boolean eventFound = dashboardClass.newCreatedEventFoundInList(eventName);
-            Assert.assertEquals(eventFound,true,"Event not found in List.");
+        String userName = ProjectUtilities.randomStringGenerator(7);
+        String emailAddress = userName + "@gmail.com";
 
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            Assert.fail();
-        }
+        promoterClass.enterUserNameEmailMobile(userName,emailAddress);
+
+        promoterClass.selectRoleAndParent();
+
+        promoterClass.clickSaveButton();
     }
 
     @AfterClass

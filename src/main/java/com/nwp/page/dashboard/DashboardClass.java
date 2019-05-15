@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
+import com.nwp.utils.ProjectUtilities;
 import java.util.List;
 
 public class DashboardClass extends NWPBasePage implements DashboardConstants {
@@ -36,22 +36,26 @@ public class DashboardClass extends NWPBasePage implements DashboardConstants {
     @FindBy(css=dashboardCss)
     WebElement dashboard;
 
-    public boolean waitForLogin() {
+    @FindBy(css=addPromoterCss)
+    WebElement addPromoterButton;
+
+    @FindBy(css = pageLoaderCss)
+    WebElement pageLoader;
+
+    public boolean waitForLogin() throws Exception {
+        Thread.sleep(1000);
+        waitForPageLoadToBeRemoved();
         setFluentWait(driver, ExpectedConditions.visibilityOf(profileButton),standardTimeOut);
         return true;
     }
 
     public void logoutUser(){
-        setFluentWait(driver,ExpectedConditions.elementToBeClickable(logoutButton),standardTimeOut);
+        waitForPageLoadToBeRemoved();
+        setFluentWait(driver,ExpectedConditions.elementToBeClickable(settingsButton),standardTimeOut);
         settingsButton.click();
         logoutButton.click();
     }
 
-    public void navigateToCashout(){
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", cashoutButton);
-        setFluentWait(driver,ExpectedConditions.visibilityOf(cashoutButton),standardTimeOut);
-        cashoutButton.click();
-    }
 
     public void clickDashboard() throws Exception{
         Thread.sleep(1000);
@@ -67,5 +71,22 @@ public class DashboardClass extends NWPBasePage implements DashboardConstants {
                 eventFound=true;
         }
         return eventFound;
+    public void navigateToCashout() throws Exception{
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", cashoutButton);
+        setFluentWait(driver,ExpectedConditions.visibilityOf(cashoutButton),standardTimeOut);
+        cashoutButton.click();
+        Thread.sleep(1000);
+        waitForPageLoadToBeRemoved();
+    }
+
+    public void waitForPageLoadToBeRemoved(){
+        ProjectUtilities.waitForElementAttributeToChange(driver,pageLoader,"style","display: none;");
+    }
+
+    public void navigateToAddPromoter() throws Exception{
+        setFluentWait(driver,ExpectedConditions.visibilityOf(addPromoterButton),standardTimeOut);
+        addPromoterButton.click();
+        Thread.sleep(1000);
+        waitForPageLoadToBeRemoved();
     }
 }

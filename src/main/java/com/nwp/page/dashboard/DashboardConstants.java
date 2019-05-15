@@ -8,4 +8,5 @@ public interface DashboardConstants {
     String cashoutCss = "div.lft-panel a[href*='cashout']";
     String pageLoaderCss = "div#loading";
     String addPromoterCss = "div.lft-panel a[href*='add-affiliate']";
+    String messageBlastCss = "div.lft-panel a[href*='message-blast']";
 }

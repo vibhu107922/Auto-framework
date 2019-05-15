@@ -32,6 +32,9 @@ public class DashboardClass extends NWPBasePage implements DashboardConstants {
     @FindBy(css=addPromoterCss)
     WebElement addPromoterButton;
 
+    @FindBy(css=messageBlastCss)
+    WebElement messageBlastButton;
+
     @FindBy(css = pageLoaderCss)
     WebElement pageLoader;
 
@@ -57,14 +60,22 @@ public class DashboardClass extends NWPBasePage implements DashboardConstants {
         waitForPageLoadToBeRemoved();
     }
 
-    public void waitForPageLoadToBeRemoved(){
-        ProjectUtilities.waitForElementAttributeToChange(driver,pageLoader,"style","display: none;");
-    }
-
     public void navigateToAddPromoter() throws Exception{
         setFluentWait(driver,ExpectedConditions.visibilityOf(addPromoterButton),standardTimeOut);
         addPromoterButton.click();
         Thread.sleep(1000);
         waitForPageLoadToBeRemoved();
     }
+
+    public void navigateToMessageBlast() throws Exception{
+        setFluentWait(driver,ExpectedConditions.visibilityOf(messageBlastButton),standardTimeOut);
+        messageBlastButton.click();
+        Thread.sleep(1000);
+        waitForPageLoadToBeRemoved();
+    }
+
+    public void waitForPageLoadToBeRemoved(){
+        ProjectUtilities.waitForElementAttributeToChange(driver,pageLoader,"style","display: none;");
+    }
+
 }

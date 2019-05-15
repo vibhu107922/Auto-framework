@@ -52,7 +52,6 @@ public class EventClass extends NWPBasePage implements EventConstants {
         PageFactory.initElements(driver,this);
     }
 
-
     public void clickOnCreateEvent() throws Exception{
         Thread.sleep(5000);
         createEvent.click();
@@ -98,5 +97,4 @@ public class EventClass extends NWPBasePage implements EventConstants {
             return false;
         }
     }
-
 }

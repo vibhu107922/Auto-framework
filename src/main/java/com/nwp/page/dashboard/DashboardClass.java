@@ -1,13 +1,17 @@
 package com.nwp.page.dashboard;
 
 import com.nwp.basePage.NWPBasePage;
-import com.nwp.utils.ProjectUtilities;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import com.nwp.utils.ProjectUtilities;
+import java.util.List;
 
 public class DashboardClass extends NWPBasePage implements DashboardConstants {
 
@@ -29,6 +33,9 @@ public class DashboardClass extends NWPBasePage implements DashboardConstants {
     @FindBy(css=cashoutCss)
     WebElement cashoutButton;
 
+    @FindBy(css=dashboardCss)
+    WebElement dashboard;
+
     @FindBy(css=addPromoterCss)
     WebElement addPromoterButton;
 
@@ -47,6 +54,23 @@ public class DashboardClass extends NWPBasePage implements DashboardConstants {
         setFluentWait(driver,ExpectedConditions.elementToBeClickable(settingsButton),standardTimeOut);
         settingsButton.click();
         logoutButton.click();
+    }
+
+
+    public void clickDashboard() throws Exception{
+        Thread.sleep(1000);
+        dashboard.click();
+    }
+
+    public boolean newCreatedEventFoundInList(String eventName) throws Exception {
+        Thread.sleep(3000);
+        List<WebElement> listOfEvents = driver.findElements(By.cssSelector(eventDropdownCss));
+        boolean eventFound = false;
+        for (WebElement event : listOfEvents) {
+            if (event.getText().contains(eventName))
+                eventFound = true;
+        }
+        return eventFound;
     }
 
     public void navigateToCashout() throws Exception{

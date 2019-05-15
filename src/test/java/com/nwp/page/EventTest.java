@@ -35,6 +35,7 @@ public class EventTest extends NWPBaseTest {
     @Test
     public void createVerifyAndSearchEvent(){
         try {
+            //TC_04
             eventClass.clickOnCreateEvent();
             Date d = new Date();
             String eventName= Long.toString(d.getTime());
@@ -47,6 +48,7 @@ public class EventTest extends NWPBaseTest {
             boolean result = eventClass.verifyTicketCreated();
             Assert.assertEquals(result,true,"Ticket not created.");
 
+            //TC_05
             dashboardClass.clickDashboard();
             boolean eventFound = dashboardClass.newCreatedEventFoundInList(eventName);
             Assert.assertEquals(eventFound,true,"Event not found in List.");

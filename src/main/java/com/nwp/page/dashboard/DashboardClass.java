@@ -62,15 +62,17 @@ public class DashboardClass extends NWPBasePage implements DashboardConstants {
         dashboard.click();
     }
 
-    public boolean newCreatedEventFoundInList(String eventName) throws Exception{
+    public boolean newCreatedEventFoundInList(String eventName) throws Exception {
         Thread.sleep(3000);
         List<WebElement> listOfEvents = driver.findElements(By.cssSelector(eventDropdownCss));
-        boolean eventFound =false;
-        for(WebElement event : listOfEvents){
-            if(event.getText().contains(eventName))
-                eventFound=true;
+        boolean eventFound = false;
+        for (WebElement event : listOfEvents) {
+            if (event.getText().contains(eventName))
+                eventFound = true;
         }
         return eventFound;
+    }
+
     public void navigateToCashout() throws Exception{
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", cashoutButton);
         setFluentWait(driver,ExpectedConditions.visibilityOf(cashoutButton),standardTimeOut);

@@ -36,14 +36,11 @@ public class MessageBlastClass extends NWPBasePage
     @FindBy(css = sendEmailCss)
     WebElement sendEmailButton;
 
-    @FindBy(css = setCss)
-    WebElement setButton;
-
     public void selectEventToPromote() throws Exception {
 	eventToPromoteSelect.click();
 	Thread.sleep(1000);
 
-	setButton.click();
+	clickSetButton();
 	Thread.sleep(1000);
     }
 
@@ -66,7 +63,7 @@ public class MessageBlastClass extends NWPBasePage
 	emailGuestListPastEventSelect.click();
 	Thread.sleep(1000);
 	firstOption.click();
-	setButton.click();
+	clickSetButton();
 	Thread.sleep(1000);
     }
 

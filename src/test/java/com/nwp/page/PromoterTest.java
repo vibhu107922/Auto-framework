@@ -43,7 +43,7 @@ public class PromoterTest extends NWPBaseTest {
 
         promoterClass.selectRoleAndParent();
 
-        promoterClass.clickSaveButton();
+        promoterClass.clickSavePromoterButton();
     }
 
     @AfterClass

@@ -32,14 +32,11 @@ public class PromoterClass extends NWPBasePage implements PromoterConstants {
     @FindBy(css = digit1Css)
     WebElement digit1;
 
-    @FindBy(css = setCss)
-    WebElement setButton;
-
     @FindBy(css = firstElementCss)
     WebElement firstOption;
 
-    @FindBy(css = saveCss)
-    WebElement saveButton;
+    @FindBy(css = savePromoterCss)
+    WebElement savePromoterButton;
 
     public void enterUserNameEmailMobile(String name, String userEmail)
 	    throws Exception {
@@ -55,24 +52,24 @@ public class PromoterClass extends NWPBasePage implements PromoterConstants {
 	}
 	Thread.sleep(1000);
 
-	setButton.click();
+	clickSetButton();
 	Thread.sleep(1000);
     }
 
     public void selectRoleAndParent() throws Exception{
         roleDropDown.click();
         firstOption.click();
-        setButton.click();
+        clickSetButton();
         Thread.sleep(1000);
 
         parent.click();
         firstOption.click();
-        setButton.click();
+        clickSetButton();
         Thread.sleep(1000);
     }
 
-    public void clickSaveButton() throws Exception{
-        saveButton.click();
+    public void clickSavePromoterButton() throws Exception{
+        savePromoterButton.click();
         Thread.sleep(3000);
     }
 }

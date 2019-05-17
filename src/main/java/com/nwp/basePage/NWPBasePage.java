@@ -42,6 +42,9 @@ public class NWPBasePage implements BasePageCommonConstants {
 	@FindBy(css = confirmDiaglogBoxCss)
 	WebElement confirmDialogBox;
 
+	@FindBy(css = setCss)
+	WebElement setButton;
+
     public static int standardTimeOut = 30;
 
     public boolean dialogBoxContainsSuccess(){
@@ -54,4 +57,7 @@ public class NWPBasePage implements BasePageCommonConstants {
     	confirmDialogBox.click();
 	}
 
+	public void clickSetButton(){
+    	setButton.click();
+	}
 }

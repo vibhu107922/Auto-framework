@@ -26,9 +26,6 @@ public class EventClass extends NWPBasePage implements EventConstants {
     @FindBy(css=eventStartDateCss)
     WebElement eventStartDate;
 
-    @FindBy(css=eventCalenderSetButtonCss)
-    WebElement eventCalenderSetButton;
-
     @FindBy(css=eventEndDateCss)
     WebElement eventEndDate;
 
@@ -67,14 +64,14 @@ public class EventClass extends NWPBasePage implements EventConstants {
     public void setEventStartDate()throws Exception{
         Thread.sleep(1000);
         eventStartDate.click();
-        eventCalenderSetButton.click();
+        clickSetButton();
     }
 
     public void setEventEndDate()throws Exception{
         Thread.sleep(1000);
         eventEndDate.click();
         eventNextDate.click();
-        eventCalenderSetButton.click();
+        clickSetButton();
     }
 
     public void setVenue(String venue){

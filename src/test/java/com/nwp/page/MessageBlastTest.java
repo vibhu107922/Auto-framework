@@ -35,25 +35,31 @@ public class MessageBlastTest extends NWPBaseTest {
     }
 
     @Test
-    public void verifySendMessageBlastList() throws Exception {
-	dashboardClass.navigateToMessageBlast();
+    public void verifySendMessageBlastList() {
 	String emailMessageBody = ProjectUtilities.randomStringGenerator(100);
 	String emailList = ProjectUtilities.randomStringGenerator(7)
 		+ "@gmail.com";
 	String emailSubject = ProjectUtilities.randomStringGenerator(20);
 
-	messageBlastClass.selectEventToPromote();
-	messageBlastClass.selectEmailGuestOfPastEvent();
-	messageBlastClass.enterEmailList(emailList);
-	messageBlastClass.enterEmailSubject(emailSubject);
-	messageBlastClass.enterEmailMessage(emailMessageBody);
+	try {
+	    dashboardClass.navigateToMessageBlast();
+	    messageBlastClass.selectEventToPromote();
+	    messageBlastClass.selectEmailGuestOfPastEvent();
+	    messageBlastClass.enterEmailList(emailList);
+	    messageBlastClass.enterEmailSubject(emailSubject);
+	    messageBlastClass.enterEmailMessage(emailMessageBody);
 
-	messageBlastClass.sendEmail();
+	    messageBlastClass.sendEmail();
 
-    Assert.assertEquals(nwpBasePageClass.dialogBoxContainsSuccess(),true,"It seems that Success was not received when we sent the email for Message Blast");
+	    Assert.assertEquals(nwpBasePageClass.dialogBoxContainsSuccess(),
+		    true,
+		    "It seems that Success was not received when we sent the email for Message Blast");
 
-    nwpBasePageClass.confirmDialogBox();
-
+	    nwpBasePageClass.confirmDialogBox();
+	} catch (Exception | AssertionError e) {
+	    e.printStackTrace();
+	    Assert.fail();
+	}
     }
 
     @AfterClass

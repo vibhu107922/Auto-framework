@@ -29,7 +29,7 @@ public class CashoutTest extends NWPBaseTest {
     }
 
     @Test
-    public void verifyCashoutFeature() throws Exception{
+    public void verifyCashoutFeature(){
         try{
             dashboardClass.navigateToCashout();
         }

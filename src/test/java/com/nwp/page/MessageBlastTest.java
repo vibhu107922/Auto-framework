@@ -1,5 +1,6 @@
 package com.nwp.page;
 
+import com.nwp.basePage.NWPBasePage;
 import com.nwp.baseTest.NWPBaseTest;
 import com.nwp.page.dashboard.DashboardClass;
 import com.nwp.page.login.LoginClass;
@@ -14,12 +15,14 @@ public class MessageBlastTest extends NWPBaseTest {
     LoginClass loginClass;
     DashboardClass dashboardClass;
     MessageBlastClass messageBlastClass;
+    NWPBasePage nwpBasePageClass;
 
     @BeforeClass
     private void setupLogin() {
 	loginClass = new LoginClass(driver);
 	dashboardClass = new DashboardClass(driver);
 	messageBlastClass = new MessageBlastClass(driver);
+	nwpBasePageClass = new NWPBasePage(driver);
 	String userName = ProjectUtilities.properties.getProperty("userName");
 	String password = ProjectUtilities.properties.getProperty("password");
 	try {
@@ -46,6 +49,11 @@ public class MessageBlastTest extends NWPBaseTest {
 	messageBlastClass.enterEmailMessage(emailMessageBody);
 
 	messageBlastClass.sendEmail();
+
+    Assert.assertEquals(nwpBasePageClass.dialogBoxContainsSuccess(),true,"It seems that Success was not received when we sent the email for Message Blast");
+
+    nwpBasePageClass.confirmDialogBox();
+
     }
 
     @AfterClass

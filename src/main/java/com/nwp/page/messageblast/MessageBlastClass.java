@@ -30,9 +30,6 @@ public class MessageBlastClass extends NWPBasePage
     @FindBy(css = emailSubjectCss)
     WebElement emailSubjectText;
 
-    @FindBy(id = messageBodyIFrameId)
-    WebElement messageBodyIFrame;
-
     @FindBy(css = messageBodyCss)
     WebElement messageBodyTextArea;
 
@@ -42,40 +39,39 @@ public class MessageBlastClass extends NWPBasePage
     @FindBy(css = setCss)
     WebElement setButton;
 
-    public void selectEventToPromote() throws Exception{
-        eventToPromoteSelect.click();
-        Thread.sleep(1000);
+    public void selectEventToPromote() throws Exception {
+	eventToPromoteSelect.click();
+	Thread.sleep(1000);
 
-        setButton.click();
-        Thread.sleep(1000);
+	setButton.click();
+	Thread.sleep(1000);
     }
 
-    public void enterEmailSubject(String subject){
-        emailSubjectText.sendKeys(subject);
+    public void enterEmailSubject(String subject) {
+	emailSubjectText.sendKeys(subject);
     }
 
-    public void enterEmailMessage(String message) throws Exception{
-        driver.switchTo().frame(messageBodyIFrame);
-        Thread.sleep(1000);
-        messageBodyTextArea.sendKeys(message);
-        Thread.sleep(2000);
-        driver.switchTo().defaultContent();
+    public void enterEmailMessage(String message) throws Exception {
+	driver.switchTo().frame(messageBodyIFrameId);
+	messageBodyTextArea.sendKeys(message);
+	Thread.sleep(2000);
+	driver.switchTo().defaultContent();
     }
 
-    public void enterEmailList(String emailList){
-        messageBlastReceiverEmailListTextArea.sendKeys(emailList);
+    public void enterEmailList(String emailList) {
+	messageBlastReceiverEmailListTextArea.sendKeys(emailList);
     }
 
-    public void selectEmailGuestOfPastEvent() throws Exception{
-        emailGuestListPastEventSelect.click();
-        Thread.sleep(1000);
-        firstOption.click();
-        setButton.click();
-        Thread.sleep(1000);
+    public void selectEmailGuestOfPastEvent() throws Exception {
+	emailGuestListPastEventSelect.click();
+	Thread.sleep(1000);
+	firstOption.click();
+	setButton.click();
+	Thread.sleep(1000);
     }
 
-    public void sendEmail(){
-        sendEmailButton.click();
+    public void sendEmail() {
+	sendEmailButton.click();
     }
 
 }

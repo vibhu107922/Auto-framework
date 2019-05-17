@@ -10,5 +10,4 @@ public interface MessageBlastConstants {
     String sendEmailCss = "button[data-ng-click*='sendEmail']";
     String setCss = "div.mbsc-fr-btn-cont div.mbsc-fr-btn-s";
     String firstElementCss = "div.mbsc-sc-whl-sc div[data-index='1']";
-    String dialogBoxCss = "div[role='dialog'] div.mbsc-comp";
 }

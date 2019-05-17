@@ -17,25 +17,30 @@ public class CashoutTest extends NWPBaseTest {
     private void setupLogin() {
 	loginClass = new LoginClass(driver);
 	dashboardClass = new DashboardClass(driver);
-        String userName = ProjectUtilities.properties.getProperty("userName");
-        String password = ProjectUtilities.properties.getProperty("password");
-        try {
-            loginClass.loginUser(userName, password);
-            Assert.assertEquals(true, dashboardClass.waitForLogin());
-        } catch (Exception | AssertionError e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+	String userName = ProjectUtilities.properties.getProperty("userName");
+	String password = ProjectUtilities.properties.getProperty("password");
+	try {
+	    loginClass.loginUser(userName, password);
+	    Assert.assertEquals(true, dashboardClass.waitForLogin());
+	} catch (Exception | AssertionError e) {
+	    e.printStackTrace();
+	    Assert.fail();
+	}
     }
 
     @Test
-    public void verifyCashoutFeature() throws Exception{
-        dashboardClass.navigateToCashout();
+    public void verifyCashoutFeature() throws Exception {
+	try {
+	    dashboardClass.navigateToCashout();
+	} catch (Exception | AssertionError e) {
+	    e.printStackTrace();
+	    Assert.fail();
+	}
     }
 
     @AfterClass
-    private void logoutUser(){
-        dashboardClass.logoutUser();
-        Assert.assertEquals(true,loginClass.waitForLogout());
+    private void logoutUser() {
+	dashboardClass.logoutUser();
+	Assert.assertEquals(true, loginClass.waitForLogout());
     }
 }

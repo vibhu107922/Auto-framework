@@ -138,19 +138,14 @@ public class NWPBasePage implements BasePageCommonConstants {
 		}
 	}
 
-	public void enterMoneyInDialogBox(String moneyToBeEntered){
-		int stringLength = moneyToBeEntered.length();
-		if(moneyToBeEntered.charAt(stringLength-3)!='.'){
-			moneyToBeEntered = moneyToBeEntered+".00";
+	public void enterMoneyInDialogBox(String moneyToBeEntered, boolean enterInDecimalMode){
+		if(enterInDecimalMode) {
+			if (!moneyToBeEntered.contains(".")) {
+				moneyToBeEntered = moneyToBeEntered + ".00";
+			}
+			moneyToBeEntered = removeCharFromString(moneyToBeEntered,'.');
 		}
-		moneyToBeEntered = removeCharFromString(moneyToBeEntered,'.');
 		char[] individualCharacter = moneyToBeEntered.toCharArray();
 		enterNumber(individualCharacter);
-	}
-
-	public static void scrollElementIntoView(WebDriver driver, WebElement element) throws Exception {
-		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", new Object[]{element});
-		((JavascriptExecutor)driver).executeScript("window.scrollBy(0,-100)", new Object[0]);
-		Thread.sleep(500);
 	}
 }

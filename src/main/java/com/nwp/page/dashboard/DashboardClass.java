@@ -55,7 +55,7 @@ public class DashboardClass extends NWPBasePage implements DashboardConstants {
     }
 
     public void navigateToCashout() throws Exception{
-        scrollElementIntoView(driver,cashoutButton);
+        ProjectUtilities.scrollElementIntoView(driver,cashoutButton);
         setFluentWait(driver,ExpectedConditions.visibilityOf(cashoutButton),standardTimeOut);
         cashoutButton.click();
         Thread.sleep(1000);

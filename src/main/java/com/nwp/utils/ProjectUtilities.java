@@ -1,5 +1,6 @@
 package com.nwp.utils;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -52,4 +53,15 @@ public class ProjectUtilities {
     public static long randomNumberGenerator(int length) {
 	return Math.round(Math.random() * Math.pow(10, length));
     }
+
+	public static void scrollElementIntoView(WebDriver driver, WebElement element) throws Exception {
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", new Object[]{element});
+		((JavascriptExecutor)driver).executeScript("window.scrollBy(0,-100)", new Object[0]);
+		Thread.sleep(500);
+	}
+
+	public static void scrollToBottom(WebDriver driver){
+		((JavascriptExecutor) driver)
+				.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+	}
 }

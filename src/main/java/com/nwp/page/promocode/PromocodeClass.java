@@ -1,6 +1,7 @@
 package com.nwp.page.promocode;
 
 import com.nwp.basePage.NWPBasePage;
+import com.nwp.utils.ProjectUtilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -92,17 +93,19 @@ public class PromocodeClass extends NWPBasePage implements PromocodeConstants {
         Thread.sleep(1000);
     }
 
-    public void enterDiscountAmount(String discountMoney){
+    public void enterDiscountAmount(String discountMoney) throws Exception{
         discountAmountText.click();
-        enterMoneyInDialogBox(discountMoney);
+        enterMoneyInDialogBox(discountMoney,true);
         clickSetButton();
+        Thread.sleep(1000);
     }
 
     public void enterAllowedUsageAmount(String allowedUsageMoney) throws Exception{
-        scrollElementIntoView(driver,allowedUsageText);
+        ProjectUtilities.scrollToBottom(driver);
         allowedUsageText.click();
-        enterMoneyInDialogBox(allowedUsageMoney);
+        enterMoneyInDialogBox(allowedUsageMoney,false);
         clickSetButton();
+        Thread.sleep(1000);
     }
 
 

@@ -81,6 +81,7 @@ public class PromocodeClass extends NWPBasePage implements PromocodeConstants {
         dateTimeSelector(calendar);
         Thread.sleep(1000);
         clickSetButton();
+        Thread.sleep(1000);
     }
 
     public void enterValidUptoDate(Calendar calendar) throws Exception{
@@ -88,6 +89,7 @@ public class PromocodeClass extends NWPBasePage implements PromocodeConstants {
         dateTimeSelector(calendar);
         Thread.sleep(1000);
         clickSetButton();
+        Thread.sleep(1000);
     }
 
     public void enterDiscountAmount(String discountMoney){

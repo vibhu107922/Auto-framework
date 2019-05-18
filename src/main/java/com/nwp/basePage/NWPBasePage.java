@@ -126,18 +126,6 @@ public class NWPBasePage implements BasePageCommonConstants {
 	}
     }
 
-    /*public String reverseString(String string){
-		char[] character = new char[string.length()];
-		String reverseOrder = "";
-
-		for(int i=0; i<string.length(); i++) {
-
-			character[i] = string.charAt((string.length()-1) - i);
-			reverseOrder = reverseOrder + character[i];
-		}
-		return reverseOrder;
-	}*/
-
 	public String removeCharFromString(String testString, char charToBeRemoved){
     	int index = testString.indexOf(charToBeRemoved);
 		return testString.substring(0,index)+testString.substring(index+1);
@@ -155,7 +143,6 @@ public class NWPBasePage implements BasePageCommonConstants {
 		if(moneyToBeEntered.charAt(stringLength-3)!='.'){
 			moneyToBeEntered = moneyToBeEntered+".00";
 		}
-		//moneyToBeEntered = reverseString(moneyToBeEntered);
 		moneyToBeEntered = removeCharFromString(moneyToBeEntered,'.');
 		char[] individualCharacter = moneyToBeEntered.toCharArray();
 		enterNumber(individualCharacter);

@@ -9,4 +9,5 @@ public interface DashboardConstants {
     String pageLoaderCss = "div#loading";
     String addPromoterCss = "div.lft-panel a[href*='add-affiliate']";
     String messageBlastCss = "div.lft-panel a[href*='message-blast']";
+    String addEditPromocodeCss = "div.lft-panel a[href*='promo-codes']";
 }

@@ -1,6 +1,5 @@
 package com.nwp.utils;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -39,18 +38,18 @@ public class ProjectUtilities {
 	});
     }
 
-	public static String randomStringGenerator(int length) {
-		char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-		StringBuilder sb = new StringBuilder(length);
-		Random random = new Random();
-		for (int i = 0; i < length; i++) {
-			char c = chars[random.nextInt(chars.length)];
-			sb.append(c);
-		}
-		return sb.toString();
+    public static String randomStringGenerator(int length) {
+	char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+	StringBuilder sb = new StringBuilder(length);
+	Random random = new Random();
+	for (int i = 0; i < length; i++) {
+	    char c = chars[random.nextInt(chars.length)];
+	    sb.append(c);
 	}
+	return sb.toString();
+    }
 
-	public static long randomNumberGenerator(int length){
-		return Math.round(Math.random()*Math.pow(10,length));
-	}
+    public static long randomNumberGenerator(int length) {
+	return Math.round(Math.random() * Math.pow(10, length));
+    }
 }

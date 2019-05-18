@@ -1,22 +1,31 @@
 package com.nwp.page;
 
+import com.nwp.basePage.NWPBasePage;
 import com.nwp.baseTest.NWPBaseTest;
 import com.nwp.page.dashboard.DashboardClass;
 import com.nwp.page.login.LoginClass;
+import com.nwp.page.promocode.PromocodeClass;
 import com.nwp.utils.ProjectUtilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Calendar;
+
 public class PromocodeTest extends NWPBaseTest {
     LoginClass loginClass;
     DashboardClass dashboardClass;
+    PromocodeClass promocodeClass;
+    NWPBasePage nwpBasePageClass;
 
     @BeforeClass
     private void setupLogin() {
 	loginClass = new LoginClass(driver);
 	dashboardClass = new DashboardClass(driver);
+	promocodeClass = new PromocodeClass(driver);
+	nwpBasePageClass = new NWPBasePage(driver);
+
 	String userName = ProjectUtilities.properties.getProperty("userName");
 	String password = ProjectUtilities.properties.getProperty("password");
 	try {
@@ -30,7 +39,28 @@ public class PromocodeTest extends NWPBaseTest {
 
     @Test
     public void verifyAddPromocode() {
+	String promocodeName = ProjectUtilities.randomStringGenerator(10);
 	try {
+	    dashboardClass.navigateToAddEditPromocode();
+	    promocodeClass.selectEvent(1);
+	    dashboardClass.waitForPageLoadToBeRemoved();
+	    promocodeClass.selectTicket(0);
+        dashboardClass.waitForPageLoadToBeRemoved();
+	    promocodeClass.enterPromocodeName(promocodeName);
+	    Calendar currentCalendar = Calendar.getInstance();
+	    promocodeClass.enterValidFromDate(currentCalendar);
+	    currentCalendar.add(Calendar.YEAR, 1);
+	    Calendar nextYearCalendar = currentCalendar;
+	    promocodeClass.enterValidUptoDate(nextYearCalendar);
+	    promocodeClass.enterDiscountAmount("100.67");
+	    promocodeClass.enterAllowedUsageAmount("25");
+	    promocodeClass.savePromoCode();
+
+	    Assert.assertEquals(nwpBasePageClass.dialogBoxContainsSuccess(),
+		    true,
+		    "It seems that Success was not received when we added a new Promocode");
+
+	    nwpBasePageClass.confirmDialogBox();
 
 	} catch (Exception | AssertionError e) {
 	    e.printStackTrace();

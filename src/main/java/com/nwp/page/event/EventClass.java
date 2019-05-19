@@ -95,5 +95,4 @@ public class EventClass extends NWPBasePage implements EventConstants {
             return false;
         }
     }
-
 }

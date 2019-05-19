@@ -60,6 +60,7 @@ public class PromocodeTest extends NWPBaseTest {
 		    "It seems that Success was not received when we added a new Promocode");
 
 	    nwpBasePageClass.confirmDialogBox();
+	    Thread.sleep(1000);
 
 	} catch (Exception | AssertionError e) {
 	    e.printStackTrace();

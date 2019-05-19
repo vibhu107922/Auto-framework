@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -78,20 +79,23 @@ public class ProjectUtilities {
 		}
 	}
 
-	public static void clickMatchingAttributeElement(List<WebElement> listOfWebElements, String attributeToBeMatched,
+	public static void clickMatchingAttributeElement(WebDriver driver, List<WebElement> listOfWebElements, String attributeToBeMatched,
 											  String valueToBeMatched){
-		for (WebElement element : listOfWebElements) {
-			if (element.getAttribute(attributeToBeMatched)
-					.equalsIgnoreCase(valueToBeMatched)) {
-				try {
-					element.click();
-				}
-				catch (Exception e){
-					System.out.println("Do nothing here and move ahead");
-				}
-				break;
-			}
+		WebElement element = searchElementInList(listOfWebElements,attributeToBeMatched,valueToBeMatched);
+		try {
+			element.click();
 		}
+		catch (Exception e){
+			System.out.println("Do nothing here and move ahead");
+		}
+	}
+
+	public static WebElement searchElementInList(List<WebElement> elements, String attributeToBeMatched, String matchingValue){
+    	for(WebElement element:elements){
+    		if(element.getAttribute(attributeToBeMatched).equalsIgnoreCase(matchingValue))
+    			return element;
+		}
+		return null;
 	}
 
 	public static String removeCharFromString(String testString, char charToBeRemoved){
@@ -99,4 +103,12 @@ public class ProjectUtilities {
 		return testString.substring(0,index)+testString.substring(index+1);
 	}
 
+	public static List<WebElement> filterListOfWebElements(List<WebElement> originalList, String attributeToBeMatched, int minimumExpectedValue){
+		List<WebElement> filteredList = new ArrayList<>();
+    	for(WebElement element:originalList){
+			if(Integer.parseInt(element.getAttribute(attributeToBeMatched))>=minimumExpectedValue)
+				filteredList.add(element);
+		}
+		return filteredList;
+	}
 }

@@ -69,7 +69,30 @@ public class PromocodeTest extends NWPBaseTest {
 
     @Test
     public void verifyEditPromocode(){
+        String newPromocodeName = ProjectUtilities.randomStringGenerator(10);
+        try {
+            dashboardClass.navigateToAddEditPromocode();
+            promocodeClass.navigateToEditPromocode();
+            promocodeClass.selectEditEvent(0);
+            dashboardClass.waitForPageLoadToBeRemoved();
+            promocodeClass.selectEditTicket(1);
+            dashboardClass.waitForPageLoadToBeRemoved();
+            promocodeClass.editPromocodeName(newPromocodeName);
+            Calendar currentCalendar = Calendar.getInstance();
+            currentCalendar.add(Calendar.MONTH, 2);
+            promocodeClass.enterEditValidUptoDate(currentCalendar);
+            promocodeClass.updatePromoCode();
 
+            Assert.assertEquals(nwpBasePageClass.dialogBoxContainsSuccess(),
+                    true,
+                    "It seems that Success was not received when we added a new Promocode");
+
+            nwpBasePageClass.confirmDialogBox();
+        }
+        catch (Exception | AssertionError e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
     }
 
     @AfterClass

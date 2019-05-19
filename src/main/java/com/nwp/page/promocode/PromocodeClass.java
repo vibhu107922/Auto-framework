@@ -28,17 +28,29 @@ public class PromocodeClass extends NWPBasePage implements PromocodeConstants {
     @FindBy(css = eventSelectButtonCss)
     WebElement eventSelectButton;
 
+    @FindBy(css = editEventSelectButtonCss)
+    WebElement editEventSelectButton;
+
     @FindBy(css = ticketSelectButtonCss)
     WebElement ticketSelectButton;
 
+    @FindBy(css = editTicketSelectButtonCss)
+    WebElement editTicketSelectButton;
+
     @FindBy(css = promocodeTextCss)
     WebElement promocodeText;
+
+    @FindBy(css = editPromocodeTextCss)
+    WebElement editPromocodeText;
 
     @FindBy(css = validFromDateSelectCss)
     WebElement validFromDateSelect;
 
     @FindBy(css = validUptoDateSelectCss)
     WebElement validUptoDateSelect;
+
+    @FindBy(css = editValidUptoDateSelectCss)
+    WebElement editValidUptoDateSelect;
 
     @FindBy(css = discountAmountTextCss)
     WebElement discountAmountText;
@@ -48,6 +60,9 @@ public class PromocodeClass extends NWPBasePage implements PromocodeConstants {
 
     @FindBy(css = savePromocodeButtonCss)
     WebElement savePromocodeButton;
+
+    @FindBy(css = updatePromocodeButtonCss)
+    WebElement updatePromocodeButton;
 
     public void navigateToAddPromocode() throws Exception {
         addPromocodeButton.click();
@@ -61,11 +76,20 @@ public class PromocodeClass extends NWPBasePage implements PromocodeConstants {
         savePromocodeButton.click();
     }
 
+    public void updatePromoCode(){
+        updatePromocodeButton.click();
+    }
+
     public void selectEvent(int indexNumber) throws Exception{
         Select selectEventDropdown = new Select(eventSelectButton);
         selectEventDropdown.selectByIndex(indexNumber);
         Thread.sleep(1000);
+    }
 
+    public void selectEditEvent(int indexNumber) throws Exception{
+        Select selectEventDropdown = new Select(editEventSelectButton);
+        selectEventDropdown.selectByIndex(indexNumber);
+        Thread.sleep(1000);
     }
 
     public void selectTicket(int indexNumber){
@@ -73,8 +97,19 @@ public class PromocodeClass extends NWPBasePage implements PromocodeConstants {
         selectTicketDropdown.selectByIndex(indexNumber);
     }
 
+    public void selectEditTicket(int indexNumber){
+        Select selectTicketDropdown = new Select(editTicketSelectButton);
+        selectTicketDropdown.selectByIndex(indexNumber);
+    }
+
     public void enterPromocodeName(String promocodeName){
+        promocodeText.clear();
         promocodeText.sendKeys(promocodeName);
+    }
+
+    public void editPromocodeName(String promocodeName){
+        editPromocodeText.clear();
+        editPromocodeText.sendKeys(promocodeName);
     }
 
     public void enterValidFromDate(Calendar calendar) throws Exception{
@@ -88,6 +123,14 @@ public class PromocodeClass extends NWPBasePage implements PromocodeConstants {
 
     public void enterValidUptoDate(Calendar calendar) throws Exception{
         validUptoDateSelect.click();
+        dateTimeSelector(calendar);
+        Thread.sleep(1000);
+        clickSetButton();
+        Thread.sleep(1000);
+    }
+
+    public void enterEditValidUptoDate(Calendar calendar) throws Exception{
+        editValidUptoDateSelect.click();
         dateTimeSelector(calendar);
         Thread.sleep(1000);
         clickSetButton();

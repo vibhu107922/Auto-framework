@@ -1,6 +1,7 @@
 package com.nwp.page.dashboard;
 
 import com.nwp.basePage.NWPBasePage;
+import com.nwp.utils.ProjectUtilities;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -33,11 +34,17 @@ public class DashboardClass extends NWPBasePage implements DashboardConstants {
     @FindBy(css=cashoutCss)
     WebElement cashoutButton;
 
-    @FindBy(css=dashboardCss)
-    WebElement dashboard;
-
     @FindBy(css=addPromoterCss)
     WebElement addPromoterButton;
+
+    @FindBy(css=messageBlastCss)
+    WebElement messageBlastButton;
+
+    @FindBy(css=addEditPromocodeCss)
+    WebElement addEditPromocode;
+
+    @FindBy(css=dashboardCss)
+    WebElement dashboard;
 
     @FindBy(css = pageLoaderCss)
     WebElement pageLoader;
@@ -55,7 +62,6 @@ public class DashboardClass extends NWPBasePage implements DashboardConstants {
         settingsButton.click();
         logoutButton.click();
     }
-
 
     public void clickDashboard() throws Exception{
         Thread.sleep(1000);
@@ -91,4 +97,19 @@ public class DashboardClass extends NWPBasePage implements DashboardConstants {
         Thread.sleep(1000);
         waitForPageLoadToBeRemoved();
     }
+
+    public void navigateToMessageBlast() throws Exception{
+        setFluentWait(driver,ExpectedConditions.visibilityOf(messageBlastButton),standardTimeOut);
+        messageBlastButton.click();
+        Thread.sleep(1000);
+        waitForPageLoadToBeRemoved();
+    }
+
+    public void navigateToAddEditPromocode() throws Exception{
+        setFluentWait(driver,ExpectedConditions.visibilityOf(addEditPromocode),standardTimeOut);
+        addEditPromocode.click();
+        Thread.sleep(1000);
+        waitForPageLoadToBeRemoved();
+    }
+
 }

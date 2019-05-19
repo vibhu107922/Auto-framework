@@ -1,26 +1,28 @@
 package com.nwp.page;
 
+import com.nwp.basePage.NWPBasePage;
 import com.nwp.baseTest.NWPBaseTest;
 import com.nwp.page.dashboard.DashboardClass;
 import com.nwp.page.login.LoginClass;
-import com.nwp.page.promoter.PromoterClass;
+import com.nwp.page.messageblast.MessageBlastClass;
 import com.nwp.utils.ProjectUtilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class PromoterTest extends NWPBaseTest {
-
+public class MessageBlastTest extends NWPBaseTest {
     LoginClass loginClass;
     DashboardClass dashboardClass;
-    PromoterClass promoterClass;
+    MessageBlastClass messageBlastClass;
+    NWPBasePage nwpBasePageClass;
 
     @BeforeClass
     private void setupLogin() {
 	loginClass = new LoginClass(driver);
 	dashboardClass = new DashboardClass(driver);
-	promoterClass = new PromoterClass(driver);
+	messageBlastClass = new MessageBlastClass(driver);
+	nwpBasePageClass = new NWPBasePage(driver);
 	String userName = ProjectUtilities.properties.getProperty("userName");
 	String password = ProjectUtilities.properties.getProperty("password");
 	try {
@@ -33,17 +35,27 @@ public class PromoterTest extends NWPBaseTest {
     }
 
     @Test
-    public void verifyAddPromoterForEvent() {
-	String userName = ProjectUtilities.randomStringGenerator(7);
-	String emailAddress = userName + "@gmail.com";
+    public void verifySendMessageBlastList() {
+	String emailMessageBody = ProjectUtilities.randomStringGenerator(100);
+	String emailList = ProjectUtilities.randomStringGenerator(7)
+		+ "@gmail.com";
+	String emailSubject = ProjectUtilities.randomStringGenerator(20);
+
 	try {
-	    dashboardClass.navigateToAddPromoter();
+	    dashboardClass.navigateToMessageBlast();
+	    messageBlastClass.selectEventToPromote();
+	    messageBlastClass.selectEmailGuestOfPastEvent();
+	    messageBlastClass.enterEmailList(emailList);
+	    messageBlastClass.enterEmailSubject(emailSubject);
+	    messageBlastClass.enterEmailMessage(emailMessageBody);
 
-	    promoterClass.enterUserNameEmailMobile(userName, emailAddress);
+	    messageBlastClass.sendEmail();
 
-	    promoterClass.selectRoleAndParent();
+	    Assert.assertEquals(nwpBasePageClass.dialogBoxContainsSuccess(),
+		    true,
+		    "It seems that Success was not received when we sent the email for Message Blast");
 
-	    promoterClass.clickSavePromoterButton();
+	    nwpBasePageClass.confirmDialogBox();
 	} catch (Exception | AssertionError e) {
 	    e.printStackTrace();
 	    Assert.fail();

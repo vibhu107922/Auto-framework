@@ -9,7 +9,6 @@ public interface EventConstants {
     //Event Start Date
     String eventStartDateCss = "input[placeholder='Event Start...']";
     String eventIframeId = "set_cookie";
-    String eventCalenderSetButtonCss= "div.mbsc-fr-btn1.mbsc-fr-btn-e.mbsc-fr-btn";
 
     //Event End Date
     String eventEndDateCss = "input[placeholder='Event End...']";

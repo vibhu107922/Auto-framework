@@ -42,16 +42,15 @@ public class PromocodeTest extends NWPBaseTest {
 	String promocodeName = ProjectUtilities.randomStringGenerator(10);
 	try {
 	    dashboardClass.navigateToAddEditPromocode();
-	    promocodeClass.selectEvent(1);
+	    promocodeClass.selectEvent(0);
 	    dashboardClass.waitForPageLoadToBeRemoved();
 	    promocodeClass.selectTicket(0);
         dashboardClass.waitForPageLoadToBeRemoved();
 	    promocodeClass.enterPromocodeName(promocodeName);
 	    Calendar currentCalendar = Calendar.getInstance();
 	    promocodeClass.enterValidFromDate(currentCalendar);
-	    currentCalendar.add(Calendar.YEAR, 1);
-	    Calendar nextYearCalendar = currentCalendar;
-	    promocodeClass.enterValidUptoDate(nextYearCalendar);
+	    currentCalendar.add(Calendar.MONTH, 2);
+	    promocodeClass.enterValidUptoDate(currentCalendar);
 	    promocodeClass.enterDiscountAmount("100.67");
 	    promocodeClass.enterAllowedUsageAmount("25");
 	    promocodeClass.savePromoCode();
@@ -66,6 +65,11 @@ public class PromocodeTest extends NWPBaseTest {
 	    e.printStackTrace();
 	    Assert.fail();
 	}
+    }
+
+    @Test
+    public void verifyEditPromocode(){
+
     }
 
     @AfterClass

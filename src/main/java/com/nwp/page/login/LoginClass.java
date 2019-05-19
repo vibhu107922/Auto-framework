@@ -28,12 +28,13 @@ public class LoginClass extends NWPBasePage implements LoginConstants {
 	PageFactory.initElements(driver, this);
     }
 
-    public void loginUser(String userName, String password) {
+    public void loginUser(String userName, String password) throws Exception {
 	ProjectUtilities.waitForElementAttributeToChange(driver, pageLoader,
 		"style", "display: none;");
 	userNameText.sendKeys(userName);
 	passwordText.sendKeys(password);
 	loginButton.click();
+	Thread.sleep(1000);
     }
 
     public boolean waitForLogout(){

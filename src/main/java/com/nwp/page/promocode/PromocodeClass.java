@@ -79,6 +79,7 @@ public class PromocodeClass extends NWPBasePage implements PromocodeConstants {
 
     public void enterValidFromDate(Calendar calendar) throws Exception{
         validFromDateSelect.click();
+        Thread.sleep(1000);
         dateTimeSelector(calendar);
         Thread.sleep(1000);
         clickSetButton();

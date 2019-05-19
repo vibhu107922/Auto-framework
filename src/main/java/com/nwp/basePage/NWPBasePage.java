@@ -1,5 +1,6 @@
 package com.nwp.basePage;
 
+import com.nwp.utils.ProjectUtilities;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -106,35 +107,19 @@ public class NWPBasePage implements BasePageCommonConstants {
 	List<WebElement> minutesOptions = minuteOption
 		.findElements(By.cssSelector(optionCss));
 
-	clickMatchingAttributeElement(dateOptions, valueAttribute, date);
-	clickMatchingAttributeElement(yearOptions, valueAttribute, year);
-	clickMatchingAttributeElement(monthOptions, valueAttribute, month);
-	clickMatchingAttributeElement(ampmOptions, valueAttribute, ampm);
-	clickMatchingAttributeElement(hourOptions, valueAttribute, hour);
-	clickMatchingAttributeElement(minutesOptions, valueAttribute, minutes);
+	ProjectUtilities.clickMatchingAttributeElement(dateOptions, indexAttribute, String.valueOf(Integer.parseInt(date)-1));
+	ProjectUtilities.clickMatchingAttributeElement(yearOptions, indexAttribute, year);
+	ProjectUtilities.clickMatchingAttributeElement(monthOptions, indexAttribute, month);
+	ProjectUtilities.clickMatchingAttributeElement(ampmOptions, indexAttribute, ampm);
+	ProjectUtilities.clickMatchingAttributeElement(hourOptions, indexAttribute, hour);
+	ProjectUtilities.clickMatchingAttributeElement(minutesOptions, indexAttribute, minutes);
     }
 
-    public void clickMatchingAttributeElement(
-	    List<WebElement> listOfWebElements, String attributeToBeMatched,
-	    String valueToBeMatched) {
-	for (WebElement element : listOfWebElements) {
-	    if (element.getAttribute(attributeToBeMatched)
-		    .equalsIgnoreCase(valueToBeMatched)) {
-		element.click();
-		break;
-	    }
-	}
-    }
-
-	public String removeCharFromString(String testString, char charToBeRemoved){
-    	int index = testString.indexOf(charToBeRemoved);
-		return testString.substring(0,index)+testString.substring(index+1);
-	}
 
 	public void enterNumber(char[] numbersToBeEntered){
     	List<WebElement> numberElements = enterMoney.findElements(By.cssSelector(buttonCss));
     	for(int i=0; i<numbersToBeEntered.length; i++){
-    		clickMatchingAttributeElement(numberElements,valueAttribute,String.valueOf(numbersToBeEntered[i]));
+			ProjectUtilities.clickMatchingAttributeElement(numberElements, dataValAttribute,String.valueOf(numbersToBeEntered[i]));
 		}
 	}
 
@@ -143,9 +128,9 @@ public class NWPBasePage implements BasePageCommonConstants {
 			if (!moneyToBeEntered.contains(".")) {
 				moneyToBeEntered = moneyToBeEntered + ".00";
 			}
-			moneyToBeEntered = removeCharFromString(moneyToBeEntered,'.');
+			moneyToBeEntered = ProjectUtilities.removeCharFromString(moneyToBeEntered,'.');
 		}
-		char[] individualCharacter = moneyToBeEntered.toCharArray();
-		enterNumber(individualCharacter);
+		char[] individualCharacterArray = moneyToBeEntered.toCharArray();
+		enterNumber(individualCharacterArray);
 	}
 }

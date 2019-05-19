@@ -1,16 +1,19 @@
 package com.nwp.utils;
 
+import com.nwp.basePage.NWPBasePage;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.Duration;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.function.Function;
 
 public class ProjectUtilities {
     public static Properties properties;
@@ -64,4 +67,36 @@ public class ProjectUtilities {
 		((JavascriptExecutor) driver)
 				.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 	}
+
+	public static boolean isElementClickable(WebDriver driver, WebElement element){
+		try{
+			NWPBasePage.setFluentWait(driver, ExpectedConditions.elementToBeClickable(element),NWPBasePage.standardTimeOut);
+			return true;
+		}
+		catch (Exception e){
+			return false;
+		}
+	}
+
+	public static void clickMatchingAttributeElement(List<WebElement> listOfWebElements, String attributeToBeMatched,
+											  String valueToBeMatched){
+		for (WebElement element : listOfWebElements) {
+			if (element.getAttribute(attributeToBeMatched)
+					.equalsIgnoreCase(valueToBeMatched)) {
+				try {
+					element.click();
+				}
+				catch (Exception e){
+					System.out.println("Do nothing here and move ahead");
+				}
+				break;
+			}
+		}
+	}
+
+	public static String removeCharFromString(String testString, char charToBeRemoved){
+		int index = testString.indexOf(charToBeRemoved);
+		return testString.substring(0,index)+testString.substring(index+1);
+	}
+
 }

@@ -3,8 +3,22 @@
 <suite name="nwp_automation">
     <test verbose="2" name="Test" preserve-order="true">
         <classes>
-
+         
+          
+              
+                 
+                       
+            
+           <class name="com.nwp.page.PromocodeTest" />
+         
+              <class name="com.nwp.page.PromoterTest" />
+                    <class name="com.nwp.page.EventTest" />
+                     <class name="com.nwp.page.CashoutTest" />
+                     
+        
+       
+        
+          
         </classes>
     </test>
-    <!-- Default test -->
 </suite> <!-- Default suite -->

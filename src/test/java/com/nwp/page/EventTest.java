@@ -17,18 +17,24 @@ public class EventTest extends NWPBaseTest {
     DashboardClass dashboardClass;
 
     @BeforeClass
-    private void setupLogin() {
+    private void setupLogin() throws InterruptedException {
+    	Thread.sleep(3000);
+    	System.out.println("KAMAL2");
         eventClass = new EventClass(driver);
         loginClass = new LoginClass(driver);
         dashboardClass = new DashboardClass(driver);
         String userName = ProjectUtilities.properties.getProperty("userName");
         String password = ProjectUtilities.properties.getProperty("password");
         try {
+        	
+        	System.out.println(loginClass.getClass().toString());
             loginClass.loginUser(userName, password);
-            Assert.assertEquals(true, dashboardClass.waitForLogin());
+           
+            Thread.sleep(2000);
+           Assert.assertEquals(true, dashboardClass.waitForLogin());
         } catch (Exception | AssertionError e) {
             e.printStackTrace();
-            Assert.fail();
+           Assert.fail();
         }
     }
 
@@ -42,14 +48,18 @@ public class EventTest extends NWPBaseTest {
             eventClass.setEventStartDate();
             eventClass.setEventEndDate();
             eventClass.setVenue("zxcvb");
-            eventClass.setEmail("abc@abc.com");
+            String email="abc@abc.com";
+            eventClass.setEmail(email);
+            Thread.sleep(5000);
             eventClass.clickNextButton();
             boolean result = eventClass.verifyTicketCreated();
-            Assert.assertEquals(result,true,"Ticket not created.");
+            Thread.sleep(2000);
+           Assert.assertEquals(result,true,"Ticket not created.");
 
             dashboardClass.clickDashboard();
-            boolean eventFound = dashboardClass.newCreatedEventFoundInList(eventName);
-            Assert.assertEquals(eventFound,true,"Event not found in List.");
+           boolean eventFound = dashboardClass.newCreatedEventFoundInList(eventName);
+           Thread.sleep(2000);
+           Assert.assertEquals(eventFound,true,"Event not found in List.");
 
         }
         catch (Exception e){
@@ -59,8 +69,10 @@ public class EventTest extends NWPBaseTest {
     }
 
     @AfterClass
-    private void logoutUser(){
+    private void logoutUser() throws InterruptedException{
         dashboardClass.logoutUser();
-        Assert.assertEquals(true,loginClass.waitForLogout());
+        Thread.sleep(2000);
+         Assert.assertEquals(true,loginClass.waitForLogout());
+         
     }
 }

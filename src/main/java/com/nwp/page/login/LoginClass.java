@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginClass extends NWPBasePage implements LoginConstants {
-    private WebDriver driver;
+    private static WebDriver driver;
 
     @FindBy(css = userNameTextCss)
     WebElement userNameText;

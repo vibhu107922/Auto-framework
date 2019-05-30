@@ -2,6 +2,8 @@ package com.nwp.page.promocode;
 
 import com.nwp.basePage.NWPBasePage;
 import com.nwp.utils.ProjectUtilities;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -80,9 +82,9 @@ public class PromocodeClass extends NWPBasePage implements PromocodeConstants {
         updatePromocodeButton.click();
     }
 
-    public void selectEvent(int indexNumber) throws Exception{
+    public void selectEvent() throws Exception{
         Select selectEventDropdown = new Select(eventSelectButton);
-        selectEventDropdown.selectByIndex(indexNumber);
+        selectEventDropdown.selectByVisibleText("Published Event");
         Thread.sleep(1000);
     }
 
@@ -150,6 +152,20 @@ public class PromocodeClass extends NWPBasePage implements PromocodeConstants {
         enterMoneyInDialogBox(allowedUsageMoney,false);
         clickSetButton();
         Thread.sleep(1000);
+    }
+    
+    public void clickOk() {
+    	driver.findElement(By.xpath("//div[@class='mbsc-fr-btn-w mbsc-fr-btn-s']")).click();
+    
+    	
+    }
+    
+    public void refreshPage() {
+    	driver.navigate().refresh();
+    }
+
+    public void navigate(String url) {
+    	driver.navigate().to(url);
     }
 
 

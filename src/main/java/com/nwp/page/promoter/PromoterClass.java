@@ -72,4 +72,8 @@ public class PromoterClass extends NWPBasePage implements PromoterConstants {
         savePromoterButton.click();
         Thread.sleep(3000);
     }
+    
+    public void pageRefresh() {
+    	driver.navigate().refresh();
+    }
 }

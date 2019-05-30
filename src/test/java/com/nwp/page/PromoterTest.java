@@ -25,6 +25,7 @@ public class PromoterTest extends NWPBaseTest {
 	String password = ProjectUtilities.properties.getProperty("password");
 	try {
 	    loginClass.loginUser(userName, password);
+	    Thread.sleep(2000);
 	    Assert.assertEquals(true, dashboardClass.waitForLogin());
 	} catch (Exception | AssertionError e) {
 	    e.printStackTrace();
@@ -44,6 +45,10 @@ public class PromoterTest extends NWPBaseTest {
 	    promoterClass.selectRoleAndParent();
 
 	    promoterClass.clickSavePromoterButton();
+	    
+	    promoterClass.pageRefresh();
+	    
+	    
 	} catch (Exception | AssertionError e) {
 	    e.printStackTrace();
 	    Assert.fail();
@@ -51,8 +56,10 @@ public class PromoterTest extends NWPBaseTest {
     }
 
     @AfterClass
-    private void logoutUser() {
+    private void logoutUser() throws InterruptedException {
 	dashboardClass.logoutUser();
+	Thread.sleep(2000);
 	Assert.assertEquals(true, loginClass.waitForLogout());
+	System.out.println("KAMAL1");
     }
 }
